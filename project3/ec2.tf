@@ -1,5 +1,5 @@
 resource "aws_instance" "web_server" {
-  count                       = 3
+  count                       = var.env "test" || var.env "qa" ? 2 : 1
   ami                         = lookup(var.ami, var.region)
   instance_type               = var.instance_type
   vpc_security_group_ids      = [aws_security_group.allow_all_sg.id]
@@ -12,15 +12,14 @@ resource "aws_instance" "web_server" {
     Env   = var.env
     Owner = "Rahul"
   }
-
   user_data = <<-EOF
-    #!/bin/bash -xe
-    sudo dnf update -y
-    sudo dnf install -y nginx
-    sudo systemctl start nginx
-    sudo systemctl enable nginx
-    sudo mkdir -p /etc/rahul
-    echo "<h1>${local.vpc_name}-Public-server-${count.index}</h1>" > /usr/share/nginx/html/index.html
-    sudo systemctl restart nginx
+    #!/bin/bash
+    echo "Hello, Terraform!" > /tmp/hello.txt
+    sudo yum update -y
+    sudo yum install -y httpd
+    sudo systemctl start httpd
+    sudo systemctl enable httpd
+    echo "<h1>${local.vpc_name}-Public-server-${count.index}</h1>" > /var/www/html/index.html
   EOF
+}
 }

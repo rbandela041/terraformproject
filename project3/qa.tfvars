@@ -13,5 +13,5 @@ ami           = {
 }
 dynamo_db     = "statelock"
 s3_bucket     = "Vikingbucket"
-test_role_arn = "arn:aws:iam::123456789012:role/terraform"
-qa_role_arn   = "arn:aws:iam::123456789012:role/terraform"
+test_role_arn = "arn:aws:iam::442042517940:user/terraform"
+qa_role_arn   = "arn:aws:iam::442042517940:user/workspace"

@@ -13,3 +13,10 @@ terraform {
     region = "us-west-2"
   }
 }
+
+provider "aws" {
+  region = var.region
+  assume_role {
+    role_arn = var.env == "test" ? var.test_role_arn : var.qa_role_arn
+  }
+}

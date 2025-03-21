@@ -7,7 +7,7 @@ resource "aws_subnet" "public-subnets" {
 
   tags = {
     Name = "${local.vpc_name}-public-subnet-${count.index}"
-    env  = var.env
+    env  = local.env
   }
 }
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "private-subnets" {
 
   tags = {
     Name = "${local.vpc_name}-private-subnet-${count.index}"
-    env  = var.env
+    env  = local.env
   }
 }
 

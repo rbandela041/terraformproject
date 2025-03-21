@@ -1,5 +1,5 @@
 resource "aws_instance" "web_server" {
-  count                       = (var.env == "test" || var.env == "qa") ? 1 : 3
+  count                       = (local.env == "test" || local.env == "qa") ? 1 : 3
   ami                         = lookup(var.ami, var.region)
   instance_type               = var.instance_type
   vpc_security_group_ids      = [aws_security_group.allow_all_sg.id]
@@ -9,7 +9,7 @@ resource "aws_instance" "web_server" {
 
   tags = {
     Name  = "${local.vpc_name}-web-server-${count.index}"
-    Env   = var.env
+    Env   = local.env
     Owner = "Rahul"
   }
   user_data = <<-EOF

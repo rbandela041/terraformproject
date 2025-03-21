@@ -6,7 +6,7 @@ resource "aws_vpc" "vpc1" {
 
   tags = {
     Name = join("-", [local.vpc_name, local.env])
-    env  = var.env
+    env  = local.env
   }
 }
 
@@ -15,6 +15,6 @@ resource "aws_internet_gateway" "vpc1" {
 
   tags = {
     Name = join("-", [local.vpc_name, local.env, "igw"])
-    env  = var.env
+    env  = local.env
   }
 }

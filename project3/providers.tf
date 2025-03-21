@@ -6,17 +6,12 @@ terraform {
       version = "5.91.0"
     }
   }
-
-  backend "s3" {
-    bucket = "terraformstatefileb1"
-    key    = "terraform/trm.tfstate"
-    region = "us-west-2"
-  }
+  backend "s3" {}
 }
 
 provider "aws" {
   region = var.region
   assume_role {
-    role_arn = var.env == "test" ? var.test_role_arn : var.qa_role_arn
+    role_arn = terraform.workspace == "test" ? var.test_role_arn : var.qa_role_arn
   }
 }

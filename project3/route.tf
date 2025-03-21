@@ -8,7 +8,7 @@ resource "aws_route_table" "publicrt" {
 
   tags = {
     Name = "${local.vpc_name}-public-rt"
-    env  = var.env
+    env  = local.env
   }
 }
 
@@ -23,7 +23,7 @@ resource "aws_route_table" "privatert" {
 
   tags = {
     Name = "${local.vpc_name}-private-rt"
-    env  = var.env
+    env  = local.env
   }
 }
 

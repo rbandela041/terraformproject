@@ -8,3 +8,7 @@ variable "ami" {}
 variable "instance_type" {}
 variable "key_name" {}
 variable "env" {}
+variable "dynamo_db" {}
+variable "s3_bucket" {}
+variable "test_role_arn" {}
+variable "qa_role_arn" {}

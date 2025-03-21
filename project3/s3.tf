@@ -16,20 +16,21 @@ resource "aws_dynamodb_table" "terraform_locks" {
   }
 
   tags = {
-    Name        = "Terraform Locks Table"
-    Environment = "Dev"
+    Name        = "local.dynamo_db"
+    Environment = "var.env"
   }
 }
 
 # Create 3 S3 buckets using count
 resource "aws_s3_bucket" "gigabyte" {
   count  = 3
-  bucket = "my-bucket-${random_integer.gigabyte.result}-${count.index}"
+  bucket = join("-", [local.s3_bucket, var.env, element(random_integer.gigabyte.*.result, count.index + 1)])
 
   depends_on = [aws_dynamodb_table.terraform_locks]
 
   tags = {
-    Name        = "gigabyte ${count.index}"
-    Environment = "Dev"
+    Name        = join("-", [local.s3_bucket, var.env, element(random_integer.gigabyte.*.result, count.index + 1)])
+    Environment = "var.env"
   }
 }
+

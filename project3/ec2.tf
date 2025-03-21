@@ -1,5 +1,5 @@
 resource "aws_instance" "web_server" {
-  count                       = var.env "test" || var.env "qa" ? 2 : 1
+  count                       = (var.env == "test" || var.env == "qa") ? 1 : 3
   ami                         = lookup(var.ami, var.region)
   instance_type               = var.instance_type
   vpc_security_group_ids      = [aws_security_group.allow_all_sg.id]
@@ -22,4 +22,4 @@ resource "aws_instance" "web_server" {
     echo "<h1>${local.vpc_name}-Public-server-${count.index}</h1>" > /var/www/html/index.html
   EOF
 }
-}
+

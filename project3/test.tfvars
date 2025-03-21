@@ -8,10 +8,9 @@ instance_type = "t2.micro"
 key_name      = "mykey"
 env           = "test"
 ami           = {
-  "us-west-2" = "ami-0c55b159cbfafe1f0"
-  "us-east-1" = "ami-0c55b159cbfafe1f0"
+  "us-west-2" = "ami-0b6d6dacf350ebc82"
+  "us-east-1" = "ami-08b5b3a93ed654d19"
 }
 dynamo_db     = "statelock"
 s3_bucket     = "Vikingbucket"
-test_role_arn = "arn:aws:iam::442042517940:user/terraform"
-qa_role_arn   = "arn:aws:iam::442042517940:user/workspace"
+test_role_arn = "arn:aws:iam::442042517940:role/Terraformrole"
